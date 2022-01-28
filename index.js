@@ -105,3 +105,84 @@ while (!choice) {
     Enemy.myStats()
     choice = pickSomeoneElse()
 }
+
+let playerDefCd = 0
+let enemyDefCd = 0
+
+let counter = 1;
+while (Player.hp > 0 && Enemy.hp > 0) {
+    let enemyBlock = false;
+    let enemyAttack = false;
+
+    let playertakeAction = false;
+    let playerBlock = false;
+
+    //bot action
+    let action = Math.floor(Math.random() * 10) + 1
+    if (action <= 6) {
+        enemyAttack = true;
+    }
+    else {
+        enemyBlock = true;
+        enemyDefCd = 2;
+    }
+    console.log("========================");
+    console.log(`        Round ${counter}         `);
+    console.log("========================");
+
+    console.log(`Player hp: ${Player.hp}`);
+    console.log(`Enemy hp: ${Enemy.hp}`);
+
+    //player action
+    console.log("Wybierz akcje: \n1. Atak\n2. Obrona");
+    let selectAction = prompt()
+    switch (selectAction) {
+        case '1':
+            {
+                if (enemyBlock != true) {
+                    console.log(`You attack and deal ${Player.str} dmg`);
+                    Enemy.hp = Enemy.hp - Player.str;
+                    playertakeAction = true;
+                    break;
+                }
+                else {
+                    console.log("Enemy blocked your attack")
+                    playertakeAction = true;
+                    break;
+                }
+            }
+        case '2':
+            {
+                if (playerDefCd == 2) {
+                    console.log("You must rest 1 turn to block again")
+                    break;
+                }
+                else {
+                    console.log("You block enemy attack")
+                    playertakeAction = true;
+                    playerDefCd = 2;
+                    break;
+                }
+            }
+    }
+
+    if (enemyAttack == true && playerBlock == false) {
+        Player.hp = Player.hp - Enemy.str;
+    }
+
+    if (playerDefCd > 0) {
+        playerDefCd--;
+    }
+    if (enemyDefCd > 0) {
+        enemyDefCd--;
+    }
+
+    counter++;
+}
+
+if (Enemy.hp <= 0) {
+    console.log("The enemy is slain, you have won")
+}
+else {
+    console.log("You died...")
+}
