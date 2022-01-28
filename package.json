@@ -1,0 +1,15 @@
+{
+  "name": "swordandjeans-js",
+  "version": "1.0.0",
+  "description": "Sword And Jeans rewrited to js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node ."
+  },
+  "author": "Helkovsky",
+  "license": "MIT",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
